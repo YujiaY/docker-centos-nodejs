@@ -1,9 +1,14 @@
-# FROM centos:8
+FROM centos:8
 
-FROM centos:7
+# FROM centos:7
 
-MAINTAINER adevur (madavurro@protonmail.com)
+MAINTAINER JackY (aujackyuan@gmail.com)
 
+RUN cd /etc/yum.repos.d/
+
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 RUN (curl -sL https://rpm.nodesource.com/setup_14.x | bash -)
 run yum clean all -y
 RUN yum update -y
