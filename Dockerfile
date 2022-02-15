@@ -1,15 +1,20 @@
-FROM centos:centos8
+# FROM centos:8
 
-LABEL MAINTAINER=nigelpoulton@hotmail.com
+FROM centos:7
 
-# Enable EPEL for Node.js
-# RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+MAINTAINER adevur (madavurro@protonmail.com)
 
-# Install Node...
-RUN yum -y update; yum clean all
-RUN yum -y install epel-release; yum clean all
-RUN yum -y install nodejs npm; yum clean all
+RUN (curl -sL https://rpm.nodesource.com/setup_14.x | bash -)
+run yum clean all -y
+RUN yum update -y
+RUN yum install -y nodejs
+RUN yum autoremove -y
+RUN yum clean all -y
+RUN npm install npm --global
 
+RUN node -v
+
+run npm -v
 # Copy app to /src
 COPY . /src
 
